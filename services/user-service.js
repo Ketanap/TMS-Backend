@@ -44,11 +44,11 @@ module.exports = {
       console.error("Failed to delete  record User: ", error);
     }
   },
-  login: async (email, pass) => {
+  login: async (data) => {
     return await User.findOne({
       where: {
-        email: email,
-        password: pass,
+        email: data.email,
+        password: data.password,
       },
     });
   },

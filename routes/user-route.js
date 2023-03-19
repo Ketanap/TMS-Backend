@@ -12,6 +12,10 @@ router.get("/:id", async function (req, res) {
 router.post("/", async function (req, res) {
   res.send(JSON.stringify(user.insert(req.body)));
 });
+router.post("login/", async function (req, res) {
+  res.send(JSON.stringify(await user.login(req.body)));
+});
+
 router.delete("/:id", async function (req, res) {
   res.send(JSON.stringify(user.delete(req.params.id)));
 });
