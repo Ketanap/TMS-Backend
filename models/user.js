@@ -8,6 +8,6 @@ const User = conn.define("tblUsers", {
   password: { type: DataTypes.STRING, allowNull: false },
   contact: { type: DataTypes.FLOAT, allowNull: true },
   roleid: { type: DataTypes.INTEGER, allowNull: false },
-  isdeleted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+  isdeleted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
 });
 module.exports = User;

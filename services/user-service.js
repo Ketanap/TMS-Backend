@@ -17,6 +17,7 @@ module.exports = {
       return await User.findOne({
         where: {
           userid: id,
+          isdeleted: false,
         },
       });
     } catch {
