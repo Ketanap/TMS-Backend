@@ -10,8 +10,8 @@ module.exports = {
     app.use("/user", userRoute);
     app.use("/client", clientRoute);
     app.use("/task", taskRoute);
-    app.use("/task-history", taskHistoryRoute);
-    app.use("/task-status", taskStatusRoute);
+    app.use("/taskhistory", taskHistoryRoute);
+    app.use("/taskstatus", taskStatusRoute);
     app.use("/project", projectRoute);
   },
 };
