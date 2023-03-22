@@ -9,10 +9,10 @@ router.get("/:id", async function (req, res) {
   res.send(JSON.stringify(await taskhistory.getOne(req.params.id)));
 });
 router.post("/", async function (req, res) {
-  res.send(JSON.stringify( taskhistory.insert(req.body)));
+  res.send(JSON.stringify(await taskhistory.insert(req.body)));
 });
 router.delete("/:id", async function (req, res) {
-  res.send(JSON.stringify( taskhistory.delete(req.params.id)));
+  res.send(JSON.stringify(await taskhistory.delete(req.params.id)));
 });
 router.put("/:id", async function (req, res) {
   res.send(JSON.stringify(await taskhistory.update(req.params.id, req.body)));

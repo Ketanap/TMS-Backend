@@ -10,16 +10,16 @@ router.get("/:id", async function (req, res) {
   res.send(JSON.stringify(await user.getOne(req.params.id)));
 });
 router.post("/", async function (req, res) {
-  res.send(JSON.stringify(user.insert(req.body)));
+  res.send(JSON.stringify(await user.insert(req.body)));
 });
 router.post("login/", async function (req, res) {
   res.send(JSON.stringify(await user.login(req.body)));
 });
 
 router.delete("/:id", async function (req, res) {
-  res.send(JSON.stringify(user.delete(req.params.id)));
+  res.send(JSON.stringify(await user.delete(req.params.id)));
 });
 router.put("/:id", async function (req, res) {
-  res.send(JSON.stringify(user.update(req.params.id, req.body)));
+  res.send(JSON.stringify(await user.update(req.params.id, req.body)));
 });
 module.exports = router;

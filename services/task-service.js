@@ -1,48 +1,48 @@
 var conn = require("../services/conn.js");
-var task = require("../models/task.js");
+var Task = require("../models/task.js");
 module.exports = {
   getAll: async () => {
     try {
-      return await task.findAll({
+      return await Task.findAll({
         where: {
           isdeleted: false,
         },
       });
-    } catch {
-      console.error("Failed to Fetch  record task: ", error);
+    } catch (error){
+      console.error("Failed to Fetch  record Task: ", error);
     }
   },
   getOne: async (id) => {
     try {
-      return await task.findOne({
+      return await Task.findOne({
         where: {
           taskid: id,
           isdeleted: false,
         },
       });
-    } catch {
-      console.error("Failed to Fetch  record task: ", error);
+    } catch (error){
+      console.error("Failed to Fetch  record Task: ", error);
     }
   },
   insert: async (data) => {
     try {
-      return await task.create(data);
-    } catch {
-      console.error("Failed to update  record task: ", error);
+      return await Task.create(data);
+    } catch (error){
+      console.error("Failed to update  record Task: ", error);
     }
   },
   update: async (id, data) => {
     try {
-      return await task.update(data, { where: { taskid: id } });
-    } catch {
-      console.error("Failed to update  record task: ", error);
+      return await Task.update(data, { where: { taskid: id } });
+    } catch (error){
+      console.error("Failed to update  record Task: ", error);
     }
   },
   delete: async (id) => {
     try {
-      return await task.update({ isdeleted: true }, { where: { taskid: id } });
-    } catch {
-      console.error("Failed to delete  record task: ", error);
+      return await Task.update({ isdeleted: true }, { where: { taskid: id } });
+    } catch (error){
+      console.error("Failed to delete  record Task: ", error);
     }
   },
   

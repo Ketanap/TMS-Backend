@@ -1,48 +1,48 @@
 var conn = require("../services/conn.js");
-var taskhistory = require("../models/taskhistory.js");
+var History = require("../models/taskhistory.js");
 module.exports = {
   getAll: async () => {
     try {
-      return await taskhistory.findAll({
+      return await History.findAll({
         where: {
           isdeleted: false,
         },
       });
-    } catch {
-      console.error("Failed to Fetch  record taskhistory: ", error);
+    } catch (error) {
+      console.error("Failed to Fetch  record History: ", error);
     }
   },
   getOne: async (id) => {
     try {
-      return await taskhistory.findOne({
+      return await History.findOne({
         where: {
-          taskhistoryid: id,
+          historyid: id,
           isdeleted: false,
         },
       });
-    } catch {
-      console.error("Failed to Fetch  record taskhistory: ", error);
+    } catch (error) {
+      console.error("Failed to Fetch  record History: ", error);
     }
   },
   insert: async (data) => {
     try {
-      return await taskhistory.create(data);
-    } catch {
-      console.error("Failed to update  record taskhistory: ", error);
+      return await History.create(data);
+    } catch (error) {
+      console.error("Failed to update  record History: ", error);
     }
   },
   update: async (id, data) => {
     try {
-      return await taskhistory.update(data, { where: { taskhistoryid: id } });
-    } catch {
-      console.error("Failed to update  record taskhistory: ", error);
+      return await History.update(data, { where: { historyid: id } });
+    } catch (error) {
+      console.error("Failed to update  record History: ", error);
     }
   },
   delete: async (id) => {
     try {
-      return await taskhistory.update({ isdeleted: true }, { where: { taskhistoryid: id } });
-    } catch {
-      console.error("Failed to delete  record taskhistory: ", error);
+      return await History.update({ isdeleted: true }, { where: { historyid: id } });
+    } catch (error) {
+      console.error("Failed to delete  record History: ", error);
     }
   },
   

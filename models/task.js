@@ -3,7 +3,7 @@ var conn = require("../services/conn.js");
 
 const tblTask = conn.define("tblTasks", {
     taskid:{type:DataTypes.INTEGER ,allowNull: false},
-    Taskdate:{type:DataTypes.STRING ,allowNull:false },
+    taskdate:{type:DataTypes.STRING ,allowNull:false },
     userid:{type:DataTypes.INTEGER, allowNull:false},
     projectid:{type:DataTypes.INTEGER, allowNull:false},
     statusid:{type:DataTypes.INTEGER, allowNull:false},

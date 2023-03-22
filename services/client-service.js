@@ -8,7 +8,7 @@ module.exports = {
           isdeleted: false,
         },
       });
-    } catch {
+    } catch (error){
       console.error("Failed to Fetch  record Client: ", error);
     }
   },
@@ -16,32 +16,32 @@ module.exports = {
     try {
       return await Client.findOne({
         where: {
-          Clientid: id,
+          clientid: id,
           isdeleted: false,
         },
       });
-    } catch {
+    } catch (error){
       console.error("Failed to Fetch  record Client: ", error);
     }
   },
   insert: async (data) => {
     try {
       return await Client.create(data);
-    } catch {
+    } catch (error){
       console.error("Failed to update  record Client: ", error);
     }
   },
   update: async (id, data) => {
     try {
-      return await Client.update(data, { where: { Clientid: id } });
-    } catch {
+      return await Client.update(data, { where: { clientid: id } });
+    } catch (error){
       console.error("Failed to update  record Client: ", error);
     }
   },
   delete: async (id) => {
     try {
-      return await Client.update({ isdeleted: true }, { where: { Clientid: id } });
-    } catch {
+      return await Client.update({ isdeleted: true }, { where: { clientid: id } });
+    } catch (error){
       console.error("Failed to delete  record Client: ", error);
     }
   }

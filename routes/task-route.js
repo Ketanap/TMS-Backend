@@ -9,7 +9,7 @@ router.get("/:id", async function (req, res) {
   res.send(JSON.stringify(await task.getOne(req.params.id)));
 });
 router.post("/", async function (req, res) {
-  res.send(JSON.stringify( task.insert(req.body)));
+  res.send(JSON.stringify(await task.insert(req.body)));
 });
 router.delete("/:id", async function (req, res) {
   res.send(JSON.stringify( task.delete(req.params.id)));
