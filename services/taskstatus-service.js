@@ -16,11 +16,11 @@ module.exports = {
     try {
       return await taskstatus.findOne({
         where: {
-          taskstatusid: id,
+          statusid: id,
           isdeleted: false,
         },
       });
-    } catch {
+    } catch (error){
       console.error("Failed to Fetch  record taskstatus: ", error);
     }
   },
@@ -34,7 +34,7 @@ module.exports = {
   update: async (id, data) => {
     try {
       return await taskstatus.update(data, { where: { taskstatusid: id } });
-    } catch {
+    } catch (error){
       console.error("Failed to update  record taskstatus: ", error);
     }
   },

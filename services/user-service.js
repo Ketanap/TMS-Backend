@@ -8,7 +8,7 @@ module.exports = {
           isdeleted: false,
         },
       });
-    } catch {
+    } catch (error){
       console.error("Failed to Fetch  record User: ", error);
     }
   },
@@ -20,28 +20,28 @@ module.exports = {
           isdeleted: false,
         },
       });
-    } catch {
+    } catch (error){
       console.error("Failed to Fetch  record User: ", error);
     }
   },
   insert: async (data) => {
     try {
       return await User.create(data);
-    } catch {
+    } catch (error){
       console.error("Failed to update  record User: ", error);
     }
   },
   update: async (id, data) => {
     try {
       return await User.update(data, { where: { userid: id } });
-    } catch {
+    } catch (error){
       console.error("Failed to update  record User: ", error);
     }
   },
   delete: async (id) => {
     try {
       return await User.update({ isdeleted: true }, { where: { userid: id } });
-    } catch {
+    } catch (error){
       console.error("Failed to delete  record User: ", error);
     }
   },

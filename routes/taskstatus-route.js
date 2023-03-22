@@ -1,3 +1,4 @@
+
 var express = require("express");
 var taskstatus = require("../services/taskstatus-service.js");
 var router = express.Router();
@@ -12,7 +13,7 @@ router.post("/", async function (req, res) {
   res.send(JSON.stringify(await taskstatus.insert(req.body)));
 });
 router.delete("/:id", async function (req, res) {
-  res.send(JSON.stringify(await  taskstatus.delete(req.params.id)));
+  res.send(JSON.stringify( await taskstatus.delete(req.params.id)));
 });
 router.put("/:id", async function (req, res) {
   res.send(JSON.stringify(await taskstatus.update(req.params.id, req.body)));
