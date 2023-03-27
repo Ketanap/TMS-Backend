@@ -1,7 +1,6 @@
 {
   "name": "tms-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -12,8 +11,19 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.2.0",
     "sequelize": "^6.29.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ketanap/TMS-Backend.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Ketanap/TMS-Backend/issues"
+  },
+  "homepage": "https://github.com/Ketanap/TMS-Backend#readme",
+  "description": ""
 }

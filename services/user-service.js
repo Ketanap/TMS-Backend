@@ -1,5 +1,8 @@
 var conn = require("../services/conn.js");
 var User = require("../models/user.js");
+const env = require('dotenv');
+const jwt = require('jsonwebtoken');
+env.config();
 module.exports = {
   getAll: async () => {
     try {
@@ -53,6 +56,34 @@ module.exports = {
           password: data.password,
         },
       });
+    } catch (error) {
+      console.error("Failed to login record User:", error);
+    }
+  },
+   logintoken: async (data) => {
+    try {
+      const user=await User.findOne({
+        where: {
+          email: data.email,
+          password: data.password,
+        },
+      });
+      let jwtSecretKey = process.env.JWT_SECRET_KEY;
+      if(user)
+      {
+      let tokendata = {
+          time: Date(),
+          userId:  user.userid,
+          email:user.email,
+          username:user.username,
+          roleid:user.roleid
+       }
+       const token = jwt.sign(tokendata, jwtSecretKey);
+       return token;
+      }
+      else{
+        return null;
+      }
     } catch (error) {
       console.error("Failed to login record User:", error);
     }

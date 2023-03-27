@@ -1,4 +1,7 @@
 var express = require("express");
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+
 var user = require("../services/user-service.js");
 var router = express.Router();
 router.get("/", async function (req, res) {
@@ -21,5 +24,8 @@ router.delete("/:id", async function (req, res) {
 });
 router.put("/:id", async function (req, res) {
   res.send(JSON.stringify(await user.update(req.params.id, req.body)));
+});
+router.post("/logintoken/", async  (req, res) => {
+  res.send(await user.logintoken(req.body))
 });
 module.exports = router;
