@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 env.config();
 var router = express.Router();
 router.get("/", async function (req, res) {
-  console.log(req.header("authorization").substring(7));
+  console.log(req.header("authorization"));
   try {
     if (
       jwt.verify(

@@ -79,7 +79,8 @@ module.exports = {
           roleid:user.roleid
        }
        const token = jwt.sign(tokendata, jwtSecretKey);
-       return token;
+       user.password="";
+       return {user:user,token:token};
       }
       else{
         return null;
