@@ -60,29 +60,28 @@ module.exports = {
       console.error("Failed to login record User:", error);
     }
   },
-   logintoken: async (data) => {
+  logintoken: async (data) => {
     try {
-      const user=await User.findOne({
+      const user = await User.findOne({
         where: {
           email: data.email,
           password: data.password,
         },
       });
       let jwtSecretKey = process.env.JWT_SECRET_KEY;
-      if(user)
-      {
-      let tokendata = {
+      if (user) {
+        let tokendata = {
           time: Date(),
-          userId:  user.userid,
-          email:user.email,
-          username:user.username,
-          roleid:user.roleid
-       }
-       const token = jwt.sign(tokendata, jwtSecretKey);
+          userId: user.userid,
+          email: user.email,
+          username: user.username,
+          roleid: user.roleid
+        }
+        const token = jwt.sign(tokendata, jwtSecretKey);
        user.password="";
        return {user:user,token:token};
       }
-      else{
+      else {
         return null;
       }
     } catch (error) {

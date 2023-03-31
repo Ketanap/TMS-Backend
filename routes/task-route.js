@@ -1,6 +1,9 @@
 var express = require("express");
 var  task = require("../services/task-service.js");
 var router = express.Router();
+const env = require("dotenv");
+env.config();
+const jwt = require("jsonwebtoken") 
 router.get("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
