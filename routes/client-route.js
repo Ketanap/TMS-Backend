@@ -48,8 +48,10 @@ router.post("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
     if (
-      jwt.verify("authorization").substring(7),
+      jwt.verify(
+        req.header("authorization").substring(7),
       process.env.JWT_SECRET_KEY
+      )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
       res.send(JSON.stringify(await client.insert(req.body)));
@@ -66,8 +68,10 @@ router.delete("/:id", async function (req, res) {
   console.log(req.header("authorization"));
   try {
     if (
-      jwt.verify("authorization").substring(7),
+      jwt.verify(
+       req.header("authorization").substring(7),
       process.env.JWT_SECRET_KEY
+      )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
       res.send(JSON.stringify(await client.delete(req.params.id)));
@@ -84,8 +88,10 @@ router.put("/:id", async function (req, res) {
   console.log(req.header("authorization"));
   try {
     if ( 
-      jwt.verify("authorization").substring(7),
+      jwt.verify(
+        req.header("authorization").substring(7),
       process.env.JWT_SECRET_KEY
+      )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
       res.send(JSON.stringify(await client.update(req.params.id, req.body)));
