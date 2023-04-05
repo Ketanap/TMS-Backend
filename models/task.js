@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 var conn = require("../services/conn.js");
 
 const tblTask = conn.define("tblTasks", {
-    taskid:{type:DataTypes.INTEGER ,allowNull: false},
+    taskid:{type:DataTypes.INTEGER ,allowNull: false , autoIncrement: true , primaryKey: true},
     taskdate:{type:DataTypes.STRING ,allowNull:false },
     userid:{type:DataTypes.INTEGER, allowNull:false},
     projectid:{type:DataTypes.INTEGER, allowNull:false},
