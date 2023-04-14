@@ -1,5 +1,8 @@
 var conn = require("../services/conn.js");
 var Project = require("../models/project.js");
+const tblProject = require("../models/project.js");
+const Client = require("../models/client.js");
+tblProject.belongsTo(Client, {foreignKey: "clientid"});
 module.exports = {
   getAll: async () => {
     try {
@@ -7,6 +10,13 @@ module.exports = {
         where: {
           isdeleted: false,
         },
+        include:[
+          {
+            model:Client,
+            required:false,
+          },
+        ],
+        attributes:{exclude:["id"]},
       });
     } catch (error){
       console.error("Failed to Fetch  record Project: ", error);

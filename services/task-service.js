@@ -1,5 +1,13 @@
 var conn = require("../services/conn.js");
 var Task = require("../models/task.js");
+const tblTaskstatus = require("../models/taskstatus.js");
+const User = require("../models/user.js");
+const tblProject = require("../models/project.js");
+const tblTask = require("../models/task.js");
+
+tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid"});
+tblTask.belongsTo(User, { foreignKey: "userid"});
+tblTask.belongsTo(tblProject, { foreignKey: "projectid"});
 module.exports = {
   getAll: async () => {
     try {
@@ -7,6 +15,21 @@ module.exports = {
         where: {
           isdeleted: false,
         },
+        include:[
+          {
+            model:User,
+            required:false,
+          },
+          {
+            model:tblTaskstatus,
+            required:false,
+          },
+          {
+            model:tblProject,
+            required: false, 
+          },
+        ],
+        attributes:{exclude: ["id"]},
       });
     } catch (error){
       console.error("Failed to Fetch  record Task: ", error);
@@ -19,6 +42,7 @@ module.exports = {
           taskid: id,
           isdeleted: false,
         },
+        attributes: ["name"],
       });
     } catch (error){
       console.error("Failed to Fetch  record Task: ", error);
