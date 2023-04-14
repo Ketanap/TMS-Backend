@@ -7,7 +7,7 @@ const tblTask = conn.define("tblTasks", {
     userid:{type:DataTypes.INTEGER, allowNull:false},
     projectid:{type:DataTypes.INTEGER, allowNull:false},
     statusid:{type:DataTypes.INTEGER, allowNull:false},
-    description:{type:DataTypes.INTEGER, allowNull:false},
+    description:{type:DataTypes.STRING, allowNull:false},
     expectedtime:{type:DataTypes.INTEGER, allowNull:false},
     actualtime:{type:DataTypes.INTEGER, allowNull:false},
     duedate:{type:DataTypes.STRING, allowNull:false},
