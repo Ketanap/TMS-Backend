@@ -29,6 +29,7 @@ module.exports = {
           projectid: id,
           isdeleted: false,
         },
+        attributes:{exclude:["id"]},
       });
     } catch (error){
       console.error("Failed to Fetch  record Project: ", error);

@@ -42,7 +42,7 @@ module.exports = {
           taskid: id,
           isdeleted: false,
         },
-        attributes: ["name"],
+        attributes:{exclude: ["id"]} ,
       });
     } catch (error){
       console.error("Failed to Fetch  record Task: ", error);
