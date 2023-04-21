@@ -24,11 +24,12 @@ module.exports = {
       console.error("Failed to Fetch  record History: ", error);
     }
   },
-  insert: async (data) => {
+  insert: async (changestatus, taskId, date, oldStatusId) => {
     try {
+      const data = { changestatus, taskId, date, oldstatusid: oldStatusId };
       return await History.create(data);
     } catch (error) {
-      console.error("Failed to update  record History: ", error);
+      console.error("Failed to insert record into History: ", error);
     }
   },
   update: async (id, data) => {

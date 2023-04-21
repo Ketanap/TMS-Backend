@@ -5,9 +5,9 @@ const User = require("../models/user.js");
 const tblProject = require("../models/project.js");
 const tblTask = require("../models/task.js");
 
-tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid"});
-tblTask.belongsTo(User, { foreignKey: "userid"});
-tblTask.belongsTo(tblProject, { foreignKey: "projectid"});
+tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid" });
+tblTask.belongsTo(User, { foreignKey: "userid" });
+tblTask.belongsTo(tblProject, { foreignKey: "projectid" });
 module.exports = {
   getAll: async () => {
     try {
@@ -15,23 +15,23 @@ module.exports = {
         where: {
           isdeleted: false,
         },
-        include:[
+        include: [
           {
-            model:User,
-            required:false,
+            model: User,
+            required: false,
           },
           {
-            model:tblTaskstatus,
-            required:false,
+            model: tblTaskstatus,
+            required: false,
           },
           {
-            model:tblProject,
-            required: false, 
+            model: tblProject,
+            required: false,
           },
         ],
-        attributes:{exclude: ["id"]},
+        attributes: { exclude: ["id"] },
       });
-    } catch (error){
+    } catch (error) {
       console.error("Failed to Fetch  record Task: ", error);
     }
   },
@@ -42,32 +42,38 @@ module.exports = {
           taskid: id,
           isdeleted: false,
         },
-        attributes:{exclude: ["id"]} ,
+        attributes: { exclude: ["id"] },
       });
-    } catch (error){
+    } catch (error) {
       console.error("Failed to Fetch  record Task: ", error);
     }
   },
   insert: async (data) => {
     try {
       return await Task.create(data);
-    } catch (error){
+    } catch (error) {
       console.error("Failed to update  record Task: ", error);
     }
   },
   update: async (id, data) => {
     try {
-      return await Task.update(data, { where: { taskid: id } });
-    } catch (error){
+      return await Task.update(
+        {
+          statusid: newstatusid,
+          oldstatusid: oldstatusid,
+          updatedate: curuntdate,
+        },
+        { where: { taskid: id } }
+      );
+    } catch (error) {
       console.error("Failed to update  record Task: ", error);
     }
   },
   delete: async (id) => {
     try {
       return await Task.update({ isdeleted: true }, { where: { taskid: id } });
-    } catch (error){
+    } catch (error) {
       console.error("Failed to delete  record Task: ", error);
     }
   },
-  
 };

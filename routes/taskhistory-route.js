@@ -4,7 +4,7 @@ var router = express.Router();
 const jwt = require("jsonwebtoken");
 const env = require("dotenv");
 env.config();
-router.get("/token", async function (req,res){
+router.get("/", async function (req,res){
   console.log(req.header("authorization"));
   try{
     if(
