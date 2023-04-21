@@ -60,6 +60,8 @@ module.exports = {
       console.error("Failed to login record User:", error);
     }
   },
+
+  
   logintoken: async (data) => {
     try {
       const user = await User.findOne({

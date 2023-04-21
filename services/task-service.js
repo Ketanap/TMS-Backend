@@ -55,18 +55,18 @@ module.exports = {
       console.error("Failed to update  record Task: ", error);
     }
   },
-  update: async (id, data) => {
+  update: async (id, data, oldstatusid, newstatusid, currentdate) => {
     try {
-      return await Task.update(
-        {
+      return await Task.update({
+          ...data,
           statusid: newstatusid,
           oldstatusid: oldstatusid,
-          updatedate: curuntdate,
+          updatedate: currentdate,
         },
         { where: { taskid: id } }
       );
     } catch (error) {
-      console.error("Failed to update  record Task: ", error);
+      console.error("Failed to update record Task: ", error);
     }
   },
   delete: async (id) => {
