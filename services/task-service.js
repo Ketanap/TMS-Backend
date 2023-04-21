@@ -59,8 +59,7 @@ module.exports = {
     try {
       return await Task.update({
           ...data,
-          statusid: newstatusid,
-          oldstatusid: oldstatusid,
+          oldstatusid: newstatusid,
           updatedate: currentdate,
         },
         { where: { taskid: id } }
