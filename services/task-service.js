@@ -55,7 +55,7 @@ module.exports = {
       console.error("Failed to update  record Task: ", error);
     }
   },
-  update: async (id, data, oldstatusid, newstatusid, currentdate) => {
+  update: async (id, data,  newstatusid, currentdate) => {
     try {
       return await Task.update({
           ...data,
