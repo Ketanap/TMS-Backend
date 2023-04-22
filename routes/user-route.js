@@ -27,6 +27,14 @@ router.put("/:id", async function (req, res) {
 router.post("/logintoken/", async (req, res) => {
   res.send(await user.logintoken(req.body));
 });
-
+router.post("/changepassword", async (req, res) => {
+  try {
+    const result = await user.changepassword(req.body);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to change password' });
+  }
+});
 
 module.exports = router;
