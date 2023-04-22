@@ -1,37 +1,47 @@
 var conn = require("../services/conn.js");
 var History = require("../models/taskhistory.js");
+
 module.exports = {
   getAll: async () => {
     try {
-      return await History.findAll({
+      const result = await History.findAll({
         where: {
           isdeleted: false,
         },
       });
+      return result;
     } catch (error) {
-      console.error("Failed to Fetch  record History: ", error);
+      console.error("Failed to Fetch record History: ", error);
+      throw error;
     }
   },
+
   getOne: async (id) => {
     try {
-      return await History.findOne({
+      const result = await History.findOne({
         where: {
           historyid: id,
           isdeleted: false,
         },
       });
+      return result;
     } catch (error) {
-      console.error("Failed to Fetch  record History: ", error);
+      console.error("Failed to Fetch record History: ", error);
+      throw error;
     }
   },
+
   insert: async (changestatus, taskId, date, oldStatusId) => {
     try {
       const data = { changestatus, taskId, date, oldstatusid: oldStatusId };
-      return await History.create(data);
+      const result = await History.create(data);
+      return result;
     } catch (error) {
       console.error("Failed to insert record into History: ", error);
+      throw error;
     }
   },
+
   update: async (id, data) => {
     try {
       return await History.update(data, { where: { historyid: id } });
@@ -39,12 +49,17 @@ module.exports = {
       console.error("Failed to update  record History: ", error);
     }
   },
+
   delete: async (id) => {
     try {
-      return await History.update({ isdeleted: true }, { where: { historyid: id } });
+      const result = await History.update(
+        { isdeleted: true },
+        { where: { historyid: id } }
+      );
+      return result;
     } catch (error) {
-      console.error("Failed to delete  record History: ", error);
+      console.error("Failed to delete record History: ", error);
+      throw error;
     }
   },
-  
 };
