@@ -8,6 +8,7 @@ const tblTask = require("../models/task.js");
 tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid" });
 tblTask.belongsTo(User, { foreignKey: "userid" });
 tblTask.belongsTo(tblProject, { foreignKey: "projectid" });
+
 module.exports = {
   getAll: async () => {
     try {
@@ -36,6 +37,35 @@ module.exports = {
     }
   },
 
+  getAllByUserId: async (userId) => {
+    try {
+      return await Task.findAll({ 
+        where:{
+          userid : userId,
+          isdeleted: false,
+        },
+        include: [
+          {
+            model: User,
+            required: false,
+          },
+          {
+            model: tblTaskstatus,
+            required: false,
+          },
+          {
+            model: tblProject,
+            required: false,
+          },
+        ],
+        attributes: { exclude: ["id"] },
+      });
+    } catch (error) {
+      console.error("Failed to Fetch record Task: ", error);
+    }
+  },
+  
+  
   getOne: async (id) => {
     try {
       return await Task.findOne({
@@ -49,6 +79,7 @@ module.exports = {
       console.error("Failed to Fetch  record Task: ", error);
     }
   },
+  
   insert: async (data) => {
     try {
       return await Task.create(data);
@@ -59,13 +90,13 @@ module.exports = {
   update: async (id, data, oldstatusid, newstatusid, currentdate) => {
     try {
       const task = await Task.findOne({ where: { taskid: id } });
-      const newstatusid = task.statusid;
+      const oldStatusId = task.statusid;
   
       return await Task.update(
         {
           ...data,
           oldstatusid: oldstatusid,
-          oldstatusid: newstatusid, 
+          newstatusid: newstatusid, 
           updatedate: currentdate,
         },
         { where: { taskid: id } }

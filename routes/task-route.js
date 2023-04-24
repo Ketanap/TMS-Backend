@@ -1,73 +1,61 @@
 var express = require("express");
-var  task = require("../services/task-service.js");
+var task = require("../services/task-service.js");
 var router = express.Router();
 const env = require("dotenv");
 env.config();
-const jwt = require("jsonwebtoken") 
+const jwt = require("jsonwebtoken");
+
 router.get("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
-    if (
-      jwt.verify(
-        req.header("authorization").substring(7),
-        process.env.JWT_SECRET_KEY
-      )
-    ) {
-      console.log(jwt.decode(req.header("authorization").substring(7)));
-      res.send(JSON.stringify(await task.getAll()));
-    } else {
-      // Access Denied
-      return res.status(401).send(error);
-    }
+    const decodedToken = jwt.verify(
+      req.header("authorization").substring(7),
+      process.env.JWT_SECRET_KEY
+    );
+    console.log(decodedToken);
+    const tasks = await task.getAll(decodedToken.userId); 
+    res.send(JSON.stringify(tasks));
   } catch (error) {
+    console.log(error);
     return res.status(401).send(error);
   }
 });
 router.get("/:id", async function (req, res) {
   console.log(req.header("authorization"));
   try {
-    if (
-      jwt.verify(
-        req.header("authorization").substring(7),
-        process.env.JWT_SECRET_KEY
-      )
-    ) {
-      console.log(jwt.decode(req.header("authorization").substring(7)));
-      res.send(JSON.stringify(await task.getOne(req.params.id)));
-    } else {
-      // Access Denied
-      return res.status(401).send(error);
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(401).send(error);
-  }
-});router.post("/", async function (req, res) {
-  console.log(req.header("authorization"));
-  try {
-    if (
-      jwt.verify(
-        req.header("authorization").substring(7),
-        process.env.JWT_SECRET_KEY
-      )
-    ) {
-      console.log(jwt.decode(req.header("authorization").substring(7)));
-      const data = {
-                changestatus: req.body.changestatus,
-                taskid: req.body.taskid,
-                changedate: req.body.changedate,
-                oldstatusid: req.body.oldstatusid,
-              };
-      res.send(JSON.stringify(await task.insert(req.body)));
-    } else {
-      // Access Denied
-      return res.status(401).send(error);
-    }
+    const decodedToken = jwt.verify(
+      req.header("authorization").substring(7),
+      process.env.JWT_SECRET_KEY
+    );
+    console.log(decodedToken);
+    const taskData = await task.getOne(req.params.id); 
+    res.send(JSON.stringify(taskData));
   } catch (error) {
     console.log(error);
     return res.status(401).send(error);
   }
 });
+
+
+router.post("/", async function (req, res) {
+  console.log(req.header("authorization"));
+  try {
+    const decodedToken = jwt.verify(
+      req.header("authorization").substring(7),
+      process.env.JWT_SECRET_KEY
+    );
+    console.log(decodedToken);
+    const taskData = { ...req.body, userId: decodedToken.userId }; 
+    const task = await task.insert(taskData);
+    res.send(JSON.stringify(task));
+  } catch (error) {
+    console.log(error);
+    return res.status(401).send(error);
+  }
+});
+
+
+
 router.delete("/:id", async function (req, res) {
   console.log(req.header("authorization"));
   try {
