@@ -31,9 +31,9 @@ module.exports = {
     }
   },
 
-  insert: async (changestatus, taskId, date, oldStatusId) => {
+  insert: async (changestatus, taskId, taskdate, oldStatusId) => {
     try {
-      const data = { changestatus, taskId, date, oldstatusid: oldStatusId };
+      const data = { changestatus, taskId, taskdate, oldstatusid: oldStatusId };
       const result = await History.create(data);
       return result;
     } catch (error) {

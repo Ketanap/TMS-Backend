@@ -35,6 +35,7 @@ module.exports = {
       console.error("Failed to Fetch  record Task: ", error);
     }
   },
+
   getOne: async (id) => {
     try {
       return await Task.findOne({
@@ -55,11 +56,16 @@ module.exports = {
       console.error("Failed to update  record Task: ", error);
     }
   },
-  update: async (id, data,  newstatusid, currentdate) => {
+  update: async (id, data, oldstatusid, newstatusid, currentdate) => {
     try {
-      return await Task.update({
+      const task = await Task.findOne({ where: { taskid: id } });
+      const newstatusid = task.statusid;
+  
+      return await Task.update(
+        {
           ...data,
-          oldstatusid: newstatusid,
+          oldstatusid: oldstatusid,
+          oldstatusid: newstatusid, 
           updatedate: currentdate,
         },
         { where: { taskid: id } }
@@ -68,6 +74,7 @@ module.exports = {
       console.error("Failed to update record Task: ", error);
     }
   },
+  
   delete: async (id) => {
     try {
       return await Task.update({ isdeleted: true }, { where: { taskid: id } });

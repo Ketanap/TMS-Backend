@@ -55,7 +55,7 @@ router.get("/:id", async function (req, res) {
       const data = {
                 changestatus: req.body.changestatus,
                 taskid: req.body.taskid,
-                date: req.body.date,
+                changedate: req.body.changedate,
                 oldstatusid: req.body.oldstatusid,
               };
       res.send(JSON.stringify(await task.insert(req.body)));
