@@ -95,8 +95,7 @@ module.exports = {
       return await Task.update(
         {
           ...data,
-          oldstatusid: oldstatusid,
-          newstatusid: newstatusid, 
+          oldstatusid:  newstatusid, 
           updatedate: currentdate,
         },
         { where: { taskid: id } }
@@ -105,7 +104,7 @@ module.exports = {
       console.error("Failed to update record Task: ", error);
     }
   },
-  
+
   delete: async (id) => {
     try {
       return await Task.update({ isdeleted: true }, { where: { taskid: id } });
