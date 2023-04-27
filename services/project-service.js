@@ -29,6 +29,12 @@ module.exports = {
           projectid: id,
           isdeleted: false,
         },
+        include:[
+          {
+            model:Client,
+            required:false,
+          },
+        ],
         attributes:{exclude:["id"]},
       });
     } catch (error){

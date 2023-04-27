@@ -72,7 +72,20 @@ module.exports = {
         where: {
           taskid: id,
           isdeleted: false,
-        },
+        }, include: [
+          {
+            model: User,
+            required: false,
+          },
+          {
+            model: tblTaskstatus,
+            required: false,
+          },
+          {
+            model: tblProject,
+            required: false,
+          },
+        ],
         attributes: { exclude: ["id"] },
       });
     } catch (error) {
