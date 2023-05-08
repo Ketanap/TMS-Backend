@@ -4,7 +4,6 @@ const tblTaskstatus = require("../models/taskstatus.js");
 const User = require("../models/user.js");
 const tblProject = require("../models/project.js");
 const tblTask = require("../models/task.js");
-
 tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid" });
 tblTask.belongsTo(User, { foreignKey: "userid" });
 tblTask.belongsTo(tblProject, { foreignKey: "projectid" });
@@ -100,13 +99,9 @@ module.exports = {
       console.error("Failed to update  record Task: ", error);
     }
   },
-  update: async (id, data, oldstatusid, newstatusid, currentdate) => {
+  update: async (id, data,  newstatusid, currentdate) => {
     try {
-      const task = await Task.findOne({ where: { taskid: id } });
-      const oldStatusId = task.statusid;
-  
-      return await Task.update(
-        {
+      return await Task.update({
           ...data,
           oldstatusid:  newstatusid, 
           updatedate: currentdate,

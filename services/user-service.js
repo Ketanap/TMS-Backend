@@ -60,25 +60,26 @@ module.exports = {
       console.error("Failed to login record User:", error);
     }
   },
- 
-  changepassword: async (data) => {
+  changepassword: async (req, res) => {
     try {
       const user = await User.findOne({
         where: {
-          email: data.email,
-          password: data.oldpassword,
+          email: req.body.email,
+          password: req.body.oldpassword,
         },
       });
       if (!user) {
-        throw new Error("Invalid email or password");
+        return res.status(401).json({ message: 'Invalid email or password' });
       }
-      await user.update({ password: data.newpassword });
-      return { message: "Password updated successfully" };
+      console.log('User found:', user.toJSON());
+      await user.update({ password: req.body.newpassword });
+      console.log('Password updated for user:', user.toJSON());
+      return res.json({ message: 'Password updated successfully' });
     } catch (error) {
-      console.error("Failed to change password:", error);
-      throw new Error("Failed to change password");
+      console.error('Failed to change password:', error);
+      return res.status(500).json({ message: 'Failed to change password' });
     }
-  },
+  },  
   
   logintoken: async (data) => {
     try {

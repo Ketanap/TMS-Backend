@@ -43,8 +43,7 @@ router.get("/:id", async function (req, res) {
     console.log(error);
     return res.status(401).send(error);
   }
-});
-router.post("/", async function (req, res) {
+});router.post("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
     if (
