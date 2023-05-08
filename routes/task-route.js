@@ -4,6 +4,7 @@ var router = express.Router();
 const env = require("dotenv");
 env.config();
 const jwt = require("jsonwebtoken") 
+
 router.get("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
@@ -42,8 +43,7 @@ router.get("/:id", async function (req, res) {
     console.log(error);
     return res.status(401).send(error);
   }
-});
-router.post("/", async function (req, res) {
+});router.post("/", async function (req, res) {
   console.log(req.header("authorization"));
   try {
     if (
@@ -54,12 +54,12 @@ router.post("/", async function (req, res) {
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
       const data = {
-        changestatus: req.body.changestatus,
-        taskid: req.body.taskid,
-        date: req.body.date,
-        oldstatusid: req.body.oldstatusid,
-      };
-      res.send(JSON.stringify(await task.insert(data)));
+                changestatus: req.body.changestatus,
+                taskid: req.body.taskid,
+                date: req.body.date,
+                oldstatusid: req.body.oldstatusid,
+              };
+      res.send(JSON.stringify(await task.insert(req.body)));
     } else {
       // Access Denied
       return res.status(401).send(error);

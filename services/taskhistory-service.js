@@ -1,5 +1,10 @@
 var conn = require("../services/conn.js");
 var History = require("../models/taskhistory.js");
+const tblTask = require("../models/task.js");
+const tblTaskstatus = require("../models/taskstatus.js");
+const tblTaskHistory = require("../models/taskhistory.js");
+tblTaskHistory.belongsTo(tblTaskstatus, { foreignKey: "statusid" });
+tblTaskHistory.belongsTo(tblTask, { foreignKey: "taskid" });
 
 module.exports = {
   getAll: async () => {
@@ -8,6 +13,18 @@ module.exports = {
         where: {
           isdeleted: false,
         },
+          include: [
+            {
+              model: tblTask,
+              required: false,
+            },
+            {
+              model: tblTaskstatus,
+              required: false,
+            },
+          ],
+          attributes: { exclude: ["id"] },
+        
       });
       return result;
     } catch (error) {
@@ -23,6 +40,18 @@ module.exports = {
           historyid: id,
           isdeleted: false,
         },
+          include: [
+            {
+              model: tblTask,
+              required: false,
+            },
+            {
+              model: tblTaskstatus,
+              required: false,
+            },
+          ],
+          attributes: { exclude: ["id"] },
+       
       });
       return result;
     } catch (error) {
@@ -31,9 +60,9 @@ module.exports = {
     }
   },
 
-  insert: async (changestatus, taskId, date, oldStatusId) => {
+  insert: async (changestatus,  taskId, taskdate, oldStatusId) => {
     try {
-      const data = { changestatus, taskId, date, oldstatusid: oldStatusId };
+      const data = { changestatus, taskid: taskId, changedate: taskdate, fromstatusid: oldStatusId };
       const result = await History.create(data);
       return result;
     } catch (error) {
