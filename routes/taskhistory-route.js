@@ -34,7 +34,6 @@ router.get("/:id", async function (req, res) {
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
       res.send(JSON.stringify(await taskhistory.getOne(req.params.id)));
-
     } else {
       // Access Denied
       return res.status(401).send(error);
@@ -105,5 +104,3 @@ router.put("/:id", async function (req, res) {
   }
 });
 module.exports = router;
-
-

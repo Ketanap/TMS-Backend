@@ -53,7 +53,6 @@ router.post("/", async function (req, res) {
       )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
-
       res.send(JSON.stringify(await project.insert(req.body)));
     } else {
       // Access Denied
@@ -74,7 +73,6 @@ router.delete("/:id", async function (req, res) {
       )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
-
       res.send(JSON.stringify(await project.delete(req.params.id)));
     } else {
       // Access Denied
@@ -95,7 +93,6 @@ router.put("/:id", async function (req, res) {
       )
     ) {
       console.log(jwt.decode(req.header("authorization").substring(7)));
-
       res.send(JSON.stringify(await project.update(req.params.id, req.body)));
     } else {
       // Access Denied

@@ -4,11 +4,9 @@ const tblTaskstatus = require("../models/taskstatus.js");
 const User = require("../models/user.js");
 const tblProject = require("../models/project.js");
 const tblTask = require("../models/task.js");
-
 tblTask.belongsTo(tblTaskstatus, { foreignKey: "statusid" });
 tblTask.belongsTo(User, { foreignKey: "userid" });
 tblTask.belongsTo(tblProject, { foreignKey: "projectid" });
-
 module.exports = {
   getAll: async () => {
     try {
@@ -36,7 +34,6 @@ module.exports = {
       console.error("Failed to Fetch  record Task: ", error);
     }
   },
-
   getAllByUserId: async (userId) => {
     try {
       return await Task.findAll({ 
@@ -117,7 +114,6 @@ module.exports = {
       console.error("Failed to update record Task: ", error);
     }
   },
-
   delete: async (id) => {
     try {
       return await Task.update({ isdeleted: true }, { where: { taskid: id } });

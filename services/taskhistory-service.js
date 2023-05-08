@@ -1,6 +1,5 @@
 var conn = require("../services/conn.js");
 var History = require("../models/taskhistory.js");
-
 module.exports = {
   getAll: async () => {
     try {
@@ -15,7 +14,6 @@ module.exports = {
       throw error;
     }
   },
-
   getOne: async (id) => {
     try {
       const result = await History.findOne({
@@ -30,7 +28,6 @@ module.exports = {
       throw error;
     }
   },
-
   insert: async (changestatus, taskId, taskdate, oldStatusId) => {
     try {
       const data = { changestatus, taskId, taskdate, oldstatusid: oldStatusId };
@@ -41,7 +38,6 @@ module.exports = {
       throw error;
     }
   },
-
   update: async (id, data) => {
     try {
       return await History.update(data, { where: { historyid: id } });
@@ -49,7 +45,6 @@ module.exports = {
       console.error("Failed to update  record History: ", error);
     }
   },
-
   delete: async (id) => {
     try {
       const result = await History.update(
