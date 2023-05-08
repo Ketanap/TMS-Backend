@@ -60,9 +60,9 @@ module.exports = {
     }
   },
 
-  insert: async (changestatus,  taskId, taskdate, oldStatusId) => {
+  insert: async (changestatus, taskId, date, oldStatusId) => {
     try {
-      const data = { changestatus, taskid: taskId, changedate: taskdate, fromstatusid: oldStatusId };
+      const data = { changestatus, taskId, date, oldstatusid: oldStatusId };
       const result = await History.create(data);
       return result;
     } catch (error) {
