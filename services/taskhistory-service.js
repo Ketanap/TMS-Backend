@@ -28,9 +28,8 @@ module.exports = {
       throw error;
     }
   },
-  insert: async (changestatus, taskId, taskdate, oldStatusId) => {
+  insert: async (data) => {
     try {
-      const data = { changestatus, taskId, taskdate, oldstatusid: oldStatusId };
       const result = await History.create(data);
       return result;
     } catch (error) {
