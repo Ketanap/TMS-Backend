@@ -79,7 +79,31 @@ module.exports = {
       throw new Error("Failed to change password");
     }
   },
-  
+
+  profile: async (data) => {
+    try {
+      const user = await User.findOne({
+        where: {
+          username:data.username,
+          email: data.email,
+          contact:data.contact,
+
+        },
+      });
+      if (!user) {
+        throw new Error("Invalid email or password");
+      }
+      await user.update({
+        username:data.newusername,
+        email: data.newemail,
+        contact:data.newcontact,
+         });
+      return { message: "Data updated successfully" };
+    } catch (error) {
+      console.error("Failed to update profile", error);
+      throw new Error("Failed to update profile");
+    }
+  },
   logintoken: async (data) => {
     try {
       const user = await User.findOne({
