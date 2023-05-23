@@ -6,7 +6,7 @@ const User = conn.define("tblUsers", {
   username: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
-  contact: { type: DataTypes.INTEGER, allowNull: true },
+  contact: { type: DataTypes.BIGINT, allowNull: true },
   roleid: { type: DataTypes.INTEGER, allowNull: false },
   isdeleted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
 });
